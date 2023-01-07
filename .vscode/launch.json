@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'hello-gtk'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=hello-gtk",
+                    "--package=hello-gtk"
+                ],
+                "filter": {
+                    "name": "hello-gtk",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'hello-gtk'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=hello-gtk",
+                    "--package=hello-gtk"
+                ],
+                "filter": {
+                    "name": "hello-gtk",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

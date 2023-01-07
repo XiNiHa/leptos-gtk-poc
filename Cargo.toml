@@ -1,0 +1,11 @@
+[package]
+name = "leptos-gtk-poc"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cuid = "1.2.0"
+gtk = { version = "0.5.5", package = "gtk4" }
+leptos = { version = "0.0.22", features = ["stable"] }
