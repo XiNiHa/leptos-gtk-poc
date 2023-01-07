@@ -4,15 +4,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'hello-gtk'",
+            "name": "Debug executable 'leptos-gtk-poc'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=hello-gtk",
-                    "--package=hello-gtk"
+                    "--bin=leptos-gtk-poc",
+                    "--package=leptos-gtk-poc"
                 ],
                 "filter": {
-                    "name": "hello-gtk",
+                    "name": "leptos-gtk-poc",
                     "kind": "bin"
                 }
             },
@@ -22,16 +22,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'hello-gtk'",
+            "name": "Debug unit tests in executable 'leptos-gtk-poc'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=hello-gtk",
-                    "--package=hello-gtk"
+                    "--bin=leptos-gtk-poc",
+                    "--package=leptos-gtk-poc"
                 ],
                 "filter": {
-                    "name": "hello-gtk",
+                    "name": "leptos-gtk-poc",
                     "kind": "bin"
                 }
             },
