@@ -41,40 +41,37 @@ impl std::fmt::Display for Color {
     }
 }
 
+fn build_style<F>(cx: Scope, id: String, selector: Option<&'static str>, f: F)
+where
+    F: Fn() -> String + 'static,
+{
+    let (provider, _) = create_signal(cx, CssProvider::new());
+
+    create_effect(cx, move |_| {
+        provider
+            .get()
+            .load_from_data(format!(r#".{}{} {{ {} }}"#, id, selector.unwrap_or(""), f()).as_bytes())
+    });
+
+    StyleContext::add_provider_for_display(
+        &Display::default().unwrap(),
+        &provider.get(),
+        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+    );
+}
+
 fn build_button(cx: Scope) -> Button {
     let (id, _) = create_signal(cx, cuid::cuid().unwrap());
 
     let (default_color, set_default_color) = create_signal(cx, Color::Red);
     let (hover_color, set_hover_color) = create_signal(cx, Color::Blue);
 
-    let (style_provider, _) = create_signal(cx, CssProvider::new());
-
-    create_effect(cx, move |_| {
-        style_provider.get().load_from_data(
-            format!(
-                r#"
-                .{0} {{
-                    color: {1};
-                    transition: color 0.5s ease;
-                }}
-
-                .{0}:hover {{
-                    color: {2};
-                }}
-                "#,
-                id.get(),
-                default_color.get(),
-                hover_color.get(),
-            )
-            .as_bytes(),
-        );
+    build_style(cx, id.get(), None, move || {
+        format!("color: {}; transition: 0.5s ease;", default_color.get())
     });
-
-    StyleContext::add_provider_for_display(
-        &Display::default().unwrap(),
-        &style_provider.get(),
-        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
-    );
+    build_style(cx, id.get(), Some(":hover"), move || {
+        format!("color: {};", hover_color.get())
+    });
 
     let el = Button::builder()
         .label("Press me!")
