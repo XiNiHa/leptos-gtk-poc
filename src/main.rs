@@ -5,7 +5,7 @@ use gtk::{
 };
 use leptos_reactive::*;
 
-const APP_ID: &str = "dev.xiniha.HelloGtk";
+const APP_ID: &str = "dev.xiniha.LeptosGtkPoc";
 
 fn main() {
     _ = create_scope(RuntimeId::default(), |cx| {
@@ -48,9 +48,9 @@ where
     let (provider, _) = create_signal(cx, CssProvider::new());
 
     create_effect(cx, move |_| {
-        provider
-            .get()
-            .load_from_data(format!(r#".{}{} {{ {} }}"#, id, selector.unwrap_or(""), f()).as_bytes())
+        provider.get().load_from_data(
+            format!(r#".{}{} {{ {} }}"#, id, selector.unwrap_or(""), f()).as_bytes(),
+        )
     });
 
     StyleContext::add_provider_for_display(
@@ -66,8 +66,9 @@ fn build_button(cx: Scope) -> Button {
     let (default_color, set_default_color) = create_signal(cx, Color::Red);
     let (hover_color, set_hover_color) = create_signal(cx, Color::Blue);
 
+    build_style(cx, id.get(), None, || "transition: 0.5s ease;".to_string());
     build_style(cx, id.get(), None, move || {
-        format!("color: {}; transition: 0.5s ease;", default_color.get())
+        format!("color: {};", default_color.get())
     });
     build_style(cx, id.get(), Some(":hover"), move || {
         format!("color: {};", hover_color.get())
