@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+cacao = "0.3.2"
 cuid = "1.2.0"
 gtk = { version = "0.5.5", package = "gtk4" }
-leptos = { version = "0.0.22", features = ["stable"] }
+leptos_reactive = { version = "0.0.22", features = ["csr", "stable"] }

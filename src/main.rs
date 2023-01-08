@@ -3,7 +3,7 @@ use gtk::prelude::*;
 use gtk::{
     Align, Application, ApplicationWindow, Box, Button, CssProvider, Orientation, StyleContext,
 };
-use leptos::*;
+use leptos_reactive::*;
 
 const APP_ID: &str = "dev.xiniha.HelloGtk";
 
